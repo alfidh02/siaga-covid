@@ -23,7 +23,6 @@
   },
   "dependencies": {
     "apexcharts": "^3.27.3",
-    "bootstrap": "^5.1.0",
     "boxicons": "^2.0.9",
     "regenerator-runtime": "^0.13.9"
   }
