@@ -176,12 +176,12 @@ body {
 
 /* end box */
 
-/* country dropdown */
-.country-select {
+/* province dropdown */
+.province-select {
     position: relative;
 }
 
-.country-select-toggle {
+.province-select-toggle {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -192,7 +192,7 @@ body {
     position: relative;
 }
 
-.country-select-list {
+.province-select-list {
     position: absolute;
     top: calc(100% + 50px);
     left: 0;
@@ -209,7 +209,7 @@ body {
     transition: all 0.3s ease-in-out;
 }
 
-.country-select-list input {
+.province-select-list input {
     width: 100%;
     border: none;
     outline: none;
@@ -218,21 +218,21 @@ body {
     border-radius: 10px;
 }
 
-.country-select-list.active {
+.province-select-list.active {
     top: calc(100% + 20px);
     visibility: visible;
     opacity: 1;
 }
 
-.country-item {
+.province-item {
     padding: 5px 15px;
     cursor: pointer;
 }
 
-.country-item:hover {
+.province-item:hover {
     background-color: var(--bg-hover);
 }
-/* end country dropdown */
+/* end province dropdown */
 
 /* count box */
 .count {

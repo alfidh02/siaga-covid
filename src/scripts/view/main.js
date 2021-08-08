@@ -26,10 +26,10 @@ function main() {
 
     await loadData('Nasional');
 
-    await loadCountrySelectList();
+    await loadProvinceSelectList();
 
-    document.querySelector('#country-select-toggle').onclick = () => {
-      document.querySelector('#country-select-list').classList.toggle('active');
+    document.querySelector('#province-select-toggle').onclick = () => {
+      document.querySelector('#province-select-list').classList.toggle('active');
     };
   };
 
@@ -173,11 +173,11 @@ function main() {
     }
   };
 
-  const loadData = async (country) => {
-    await loadSummary(country);
+  const loadData = async (province) => {
+    await loadSummary(province);
   };
 
-  const isNasional = (country) => country === 'Nasional';
+  const isNasional = (province) => province === 'Nasional';
 
   const numberWithCommas = (x) => x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 
@@ -193,22 +193,22 @@ function main() {
     document.querySelector('#death-total').textContent = numberWithCommas(total);
   };
 
-  const loadSummary = (country) => {
-    const countryRank = covidApi.getProvinceCases();
+  const loadSummary = (province) => {
+    const provinceRank = covidApi.getProvinceCases();
     const last_update = document.querySelector('#updated-time');
 
-    if (isNasional(country)) {
+    if (isNasional(province)) {
       covidData = covidApi.getSummary();
     } else {
       covidData = covidApi.getProvinceCases()
-        .then((provinceData) => provinceData.filter((e) => e.provinsi.toLowerCase() === country.toLowerCase())[0]);
+        .then((provinceData) => provinceData.filter((e) => e.provinsi.toLowerCase() === province.toLowerCase())[0]);
     }
 
     covidData.then((summaryData) => {
-      isNasional(country) ? showConfirmedTotal(summaryData.positif) : showConfirmedTotal(summaryData.kasus);
+      isNasional(province) ? showConfirmedTotal(summaryData.positif) : showConfirmedTotal(summaryData.kasus);
       showRecoveredTotal(summaryData.sembuh);
       showDeathsTotal(summaryData.meninggal);
-      loadRecoveryRate(Math.floor(summaryData.sembuh / (isNasional(country) ? summaryData.positif : summaryData.kasus) * 100));
+      loadRecoveryRate(Math.floor(summaryData.sembuh / (isNasional(province) ? summaryData.positif : summaryData.kasus) * 100));
       return summaryData.lastUpdate;
     })
       .then((timeUpdated) => {
@@ -216,8 +216,8 @@ function main() {
         last_update.textContent = `Terakhir diupdate : ${update_time.toLocaleString()}`;
       });
 
-    countryRank.then((dataCountry) => {
-      const caseInfo = dataCountry.sort((a, b) => b.kasus - a.kasus);
+    provinceRank.then((dataProvince) => {
+      const caseInfo = dataProvince.sort((a, b) => b.kasus - a.kasus);
       const table_countries_body = document.querySelector('#table-countries tbody');
       table_countries_body.innerHTML = '';
 
@@ -252,54 +252,52 @@ function main() {
   };
 
   const loadRecoveryRate = async (rate) => {
-    // use updateSeries
     recover_rate_chart.updateSeries([rate]);
   };
 
-  // country select
-  const renderCountrySelectList = (list) => {
-    const country_select_list = document.querySelector('#country-select-list');
-    country_select_list.querySelectorAll('div').forEach((e) => e.remove());
+  const renderProvinceSelectList = (list) => {
+    const province_select_list = document.querySelector('#province-select-list');
+    province_select_list.querySelectorAll('div').forEach((e) => e.remove());
     list.forEach((e) => {
       const item = document.createElement('div');
-      item.classList.add('country-item');
+      item.classList.add('province-item');
       item.textContent = e.provinsi;
 
       item.onclick = async () => {
-        document.querySelector('#country-select span').textContent = e.provinsi;
-        country_select_list.classList.toggle('active');
+        document.querySelector('#province-select span').textContent = e.provinsi;
+        province_select_list.classList.toggle('active');
         await loadData(e.provinsi);
       };
 
-      country_select_list.appendChild(item);
+      province_select_list.appendChild(item);
     });
   };
 
-  const loadCountrySelectList = async () => {
+  const loadProvinceSelectList = async () => {
     const provinceSummary = await covidApi.getProvinceCases();
 
     countries_list = provinceSummary;
 
-    const country_select_list = document.querySelector('#country-select-list');
+    const province_select_list = document.querySelector('#province-select-list');
 
     const item = document.createElement('div');
-    item.classList.add('country-item');
+    item.classList.add('province-item');
     item.textContent = 'Nasional';
     item.onclick = async () => {
-      document.querySelector('#country-select span').textContent = 'Nasional';
-      country_select_list.classList.toggle('active');
+      document.querySelector('#province-select span').textContent = 'Nasional';
+      province_select_list.classList.toggle('active');
       await loadData('Nasional');
     };
-    country_select_list.appendChild(item);
+    province_select_list.appendChild(item);
 
-    renderCountrySelectList(countries_list);
+    renderProvinceSelectList(countries_list);
   };
 
   const initProvinceFilter = () => {
-    const input = document.querySelector('#country-select-list input');
+    const input = document.querySelector('#province-select-list input');
     input.onkeyup = () => {
       const filtered = countries_list.filter((e) => e.provinsi.toLowerCase().includes(input.value));
-      renderCountrySelectList(filtered);
+      renderProvinceSelectList(filtered);
     };
   };
 }
