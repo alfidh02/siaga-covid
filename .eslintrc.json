@@ -12,19 +12,18 @@
     },
     "rules": {
         "no-console": "off",
-        "no-undef" : "off",
         "max-len" : "off",
         "camelcase" : "off",
-        "default-case" : "off",
         "no-use-before-define" : "off",
+        "no-unused-expressions": "off",
         "no-alert" : "off",
         "no-plusplus" : "off",
         "no-mixed-operators" : "off",
         "no-unused-vars" : "off",
-        "no-unused-expressions": "off",
-        "no-return-await" : "off",
-        "prefer-promise-reject-errors" : "off",
-        "prefer-destructuring": "off",
-        "no-shadow": "off"
+        "no-shadow": "off",
+        "import/extensions" : "off",
+        "prefer-promise-reject-errors": "off",
+        "import/no-extraneous-dependencies": "off",
+        "linebreak-style": "off"
     }
 }
