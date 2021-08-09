@@ -54,6 +54,7 @@ The website is intended for final submission on Dicoding course too, thus things
 
 ## Acknowledgements
 
+ - [Dicoding Indonesia](https://www.dicoding.com/academies/163)
  - [API COVID-19 Indonesia](https://github.com/Reynadi531/api-covid19-indonesia-v2)
  - [Boxicons](https://boxicons.com)
  - [ApexCharts.js](https://apexcharts.com)
