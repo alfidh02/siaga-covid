@@ -141,7 +141,7 @@ body {
 
 .box-hover:hover {
     transform: scale(1.05) translateY(-10px);
-    box-shadow: rgb(0 0 0 / 10%) 0px 15px 30px;
+    box-shadow: rgb(0 0 0 / 10%) 0 15px 30px;
 }
 
 .box-header {

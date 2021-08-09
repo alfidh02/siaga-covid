@@ -4,7 +4,7 @@ import * as am4charts from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 import covidApi from '../data/covid-api.js';
 
-function main() {
+const main = () => {
   let covidData;
   let countries_list;
   let recover_rate_chart;
@@ -300,6 +300,6 @@ function main() {
       renderProvinceSelectList(filtered);
     };
   };
-}
+};
 
 export default main;
