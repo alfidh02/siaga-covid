@@ -41,7 +41,7 @@ const main = () => {
       case_province_chart.responsive.enabled = true;
       case_province_chart.topAxesContainer.paddingTop = 30;
 
-      case_province_chart.dataSource.url = 'http://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi';
+      case_province_chart.dataSource.url = 'https://apicovid19indonesia-v2.vercel.app/api/indonesia/provinsi';
       case_province_chart.legend = new am4charts.Legend();
       case_province_chart.legend.position = 'top';
       case_province_chart.legend.fontSize = 12;
@@ -224,6 +224,7 @@ const main = () => {
       for (let i = 0; i < 12; i++) {
         const row = `
               <tr>
+                  <td>${i + 1}</td>
                   <td>${caseInfo[i].provinsi}</td>
                   <td>${numberWithCommas(caseInfo[i].kasus)}</td>
                   <td>${numberWithCommas(caseInfo[i].sembuh)}</td>
